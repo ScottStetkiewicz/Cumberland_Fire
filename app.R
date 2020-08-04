@@ -61,13 +61,15 @@ server <- function(input, output, session) {
     # ri <- readOGR('~/Desktop/R/CFD/ri/Municipalities__1997_.shp')
     # fname <- getURL('http://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp')
     # ri<-readOGR(fname)
-    
-    # fname <- sf::st_read('http://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp')
+    # test<-'http://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp'
+
+    # fname <- sf::st_read('https://github.com/ScottStetkiewicz/Cumberland_Fire/blob/master/ri/Municipalities__1997_.shp')
     # fname <- sf::st_read('~/Desktop/R/CFD/ri/Municipalities__1997_.shp')
     # ri <- readOGR(dsn='https://github.com/ScottStetkiewicz/Cumberland_Fire/tree/master/ri', layer = 'Municipalities__1997_.shp')
     # ri <- readOGR(dsn='https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp', layer = 'Municipalities__1997_')
     
-    ri <- read_csv("https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/ri.csv")
+    # ri <- read_csv("https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/ri.csv")
+    rgdal::readOGR("ri.geojson")
     cumb = subset(ri, NAME=="CUMBERLAND")
 
     filteredData <- reactive({
