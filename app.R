@@ -13,7 +13,6 @@ library(rgdal)
 library(KernSmooth)
 library(raster)
 library(shinyBS)
-library(RCurl)
 
 incidents <- read_csv("https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/incidents.csv")
 geo_unique<-incidents %>% filter(!(is.na(lat)))
@@ -57,19 +56,7 @@ ui<-fluidPage(theme = shinytheme("cerulean"),
 
 server <- function(input, output, session) {
 
-    # url<-readOGR('https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/blob/master/ri/Municipalities__1997_.shp',layer = 'Municipalities__1997_.shp')
-    # ri <- readOGR('~/Desktop/R/CFD/ri/Municipalities__1997_.shp')
-    # fname <- getURL('http://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp')
-    # ri<-readOGR(fname)
-    # test<-'http://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp'
-
-    # fname <- sf::st_read('https://github.com/ScottStetkiewicz/Cumberland_Fire/blob/master/ri/Municipalities__1997_.shp')
-    # fname <- sf::st_read('~/Desktop/R/CFD/ri/Municipalities__1997_.shp')
-    # ri <- readOGR(dsn='https://github.com/ScottStetkiewicz/Cumberland_Fire/tree/master/ri', layer = 'Municipalities__1997_.shp')
-    # ri <- readOGR(dsn='https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/Municipalities__1997_.shp', layer = 'Municipalities__1997_')
-    
-    # ri <- read_csv("https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/ri.csv")
-    rgdal::readOGR("ri.geojson")
+    ri <- rgdal::readOGR("https://raw.githubusercontent.com/ScottStetkiewicz/Cumberland_Fire/master/ri/ri.geojson")
     cumb = subset(ri, NAME=="CUMBERLAND")
 
     filteredData <- reactive({
